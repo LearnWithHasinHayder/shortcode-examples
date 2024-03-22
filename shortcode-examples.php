@@ -31,7 +31,8 @@ class Shortcode_Examples {
 
         //register a custom post type 'time' with only title
         register_post_type('time', [
-            'public' => true,
+            'public' => false,
+            'show_ui'=>true,
             'label' => 'Time',
             'supports' => ['title']
         ]);
@@ -116,7 +117,7 @@ class Shortcode_Examples {
                 <option value="GMT+1">GMT+1</option>
                 <option value="GMT+2">GMT+2</option>
                 <option value="GMT+3">GMT+3</option>
-                
+
 
                 <?php 
                 $timezones = timezone_identifiers_list();
@@ -176,9 +177,11 @@ class Shortcode_Examples {
             'height' => '315'
         ];
 
+        $atts['type'] = sanitize_text_field($atts['type']);
+
         $attributes = shortcode_atts($default_values, $atts);
 
-        $attributes['type'] = sanitize_text_field($attributes['type']);
+        
 
         $attributes['id'] = esc_attr($attributes['id']);
         $attributes['width'] = esc_attr($attributes['width']);
